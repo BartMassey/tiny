@@ -1,0 +1,22 @@
+[package]
+name = "tiny"
+version = "0.1.0"
+authors = ["Bart Massey <bart.massey@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+libc = "0.2.91"
+
+[lib]
+name = "tiny"
+path = "tiny.rs"
+crate-type = ["staticlib"]
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
+opt-level = "s"
+codegen-units = 1
+lto = "fat"
