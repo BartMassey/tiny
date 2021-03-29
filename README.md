@@ -19,6 +19,9 @@ then need to
     rustup install nightly
     rustup target add --toolchain nightly x86_64-unknown-linux-musl
 
+You will also need `musl-dev` or the equivalent package
+installed on your box.
+
 Take a look at the `Makefile` for all the gory details of
 everything. Comment `tiny-rs` out of `BIN` there if you
 don't want to mess with Rust.
