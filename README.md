@@ -40,6 +40,8 @@ print some stats. On my box it shows
        text	   data	    bss	    dec	    hex	filename
          55	     32	      0	     87	     57	tiny-rs
 
+Stripping the executables doesn't reduce the filesize much.
+
 ## Caveats
 
 I was surprised that the C binary was so much code,
