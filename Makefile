@@ -1,6 +1,7 @@
 CC = gcc
 CFLAGS = -Os
-
+LDFLAGS = -Bstatic
+LIBC = /usr/lib/x86_64-linux-musl/libc.a
 RUSTLIB = target/x86_64-unknown-linux-musl/release/libtiny.a
 
 BINS = tiny-s tiny-c tiny-rs
@@ -8,7 +9,7 @@ BINS = tiny-s tiny-c tiny-rs
 all: $(BINS)
 
 tiny-c: tiny-c.o
-	ld -Bstatic -o tiny-c tiny-c.o /usr/lib/x86_64-linux-musl/libc.a
+	ld $(LDFLAGS) -o tiny-c tiny-c.o $(LIBC)
 
 tiny-c.o: tiny.c
 	$(CC) $(CFLAGS) -c -o tiny-c.o tiny.c
@@ -20,7 +21,7 @@ tiny-s.o: tiny.S
 	as -o tiny-s.o tiny.S
 
 tiny-rs: $(RUSTLIB)
-	ld -o tiny-rs $(RUSTLIB) /usr/lib/x86_64-linux-musl/libc.a
+	ld -o tiny-rs $(RUSTLIB) $(LIBC)
 
 $(RUSTLIB): tiny.rs Cargo.toml
 	rustup run nightly cargo build \
@@ -28,6 +29,9 @@ $(RUSTLIB): tiny.rs Cargo.toml
 
 stats: $(BINS)
 	@for b in $(BINS); do ls -l $$b; size $$b; echo ''; done
+
+test: $(BINS)
+	for b in $(BINS); do ./$$b || ( echo $$b failed ; exit 1 ) ; done
 
 clean:
 	cargo clean
