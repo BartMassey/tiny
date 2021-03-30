@@ -8,10 +8,10 @@ BINS = tiny-s tiny-c tiny-rs
 all: $(BINS)
 
 tiny-c: tiny-c.o
-	ld -Bstatic -o tiny-c tiny-c.o -lc
+	ld -Bstatic -o tiny-c tiny-c.o /usr/lib/x86_64-linux-musl/libc.a
 
 tiny-c.o: tiny.c
-	gcc -c -o tiny-c.o tiny.c
+	$(CC) $(CFLAGS) -c -o tiny-c.o tiny.c
 
 tiny-s: tiny-s.o
 	ld -o tiny-s tiny-s.o
