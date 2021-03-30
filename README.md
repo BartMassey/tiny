@@ -31,19 +31,20 @@ don't want to mess with Rust.
 Run via `make stats`. That should build everything and
 print some stats. On my box it shows
 
-    -rwxr-xr-x 1 bart bart 4640 Mar 29 16:25 tiny-s
+    -rwxr-xr-x 1 bart bart 4640 Mar 29 19:49 tiny-s
        text	   data	    bss	    dec	    hex	filename
          16	      0	      0	     16	     10	tiny-s
 
-    -rwxr-xr-x 1 bart bart 9280 Mar 29 16:25 tiny-c
+    -rwxr-xr-x 1 bart bart 9080 Mar 29 19:49 tiny-c
        text	   data	    bss	    dec	    hex	filename
-        164	      0	      4	    168	     a8	tiny-c
+         99	      0	      0	     99	     63	tiny-c
 
-    -rwxr-xr-x 1 bart bart 9264 Mar 29 16:25 tiny-rs
+    -rwxr-xr-x 1 bart bart 9264 Mar 29 19:49 tiny-rs
        text	   data	    bss	    dec	    hex	filename
          55	     32	      0	     87	     57	tiny-rs
 
 Stripping the executables doesn't reduce the filesize much.
+Clang vs GCC doesn't affect the C codesize at all.
 
 ## Caveats
 
